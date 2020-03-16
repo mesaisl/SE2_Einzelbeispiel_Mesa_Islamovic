@@ -72,4 +72,30 @@ public class MainActivity extends AppCompatActivity {
 
         return antwortVomServer;
     }
+    public String calcAlternierendeQuersumme(int num) {
+        int altCrossSum = 0;
+        int i = 0;
+
+        while (num > 0) {
+            if (i % 2 == 0) {
+                altCrossSum += num % 10;
+                i++;
+            } else {
+                altCrossSum -= num % 10;
+                i++;
+            }
+            num = num / 10;
+        }
+        return "Alternierende Quersumme= "+altCrossSum+ "  Gerade/Ungerade: " +geradeOderUngerade(altCrossSum);
+    }
+    public String geradeOderUngerade(int num){
+        if(num%2==0){
+            return "Gerade";
+        }else{
+            return "Ungerade";
+        }
+    }
+
+
+
 }
