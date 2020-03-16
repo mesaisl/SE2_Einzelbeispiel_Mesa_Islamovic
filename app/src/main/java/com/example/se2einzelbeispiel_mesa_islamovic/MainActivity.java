@@ -8,11 +8,19 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
+import java.io.*;
+import java.net.Socket;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView textQuersumme;
     private EditText matrikelNrTxt;
     private TextView textAntwort;
+    private Socket socket;
+    private OutputStream output;
+    private PrintWriter printWriter;
+    private BufferedReader bufferedReader;
+    private String antwortVomServer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,5 +43,33 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    public String workingWithServer(){
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                EditText editText = (EditText) findViewById(R.id.editText);
+                try {
+                    socket = new Socket("se2-isys.aau.at",53212);
+                    output = socket.getOutputStream();
+                    printWriter = new PrintWriter(output, true);
+                    printWriter.println(editText.getText().toString());
+                    bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                    antwortVomServer = bufferedReader.readLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+        try{
+            thread.join();
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+
+        return antwortVomServer;
     }
 }
