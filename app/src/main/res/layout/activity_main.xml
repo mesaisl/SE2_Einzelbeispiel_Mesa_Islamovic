@@ -26,7 +26,7 @@
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" android:layout_marginTop="88dp"/>
     <TextView
-            android:text="Gib deine Martikelnummer ein"
+            android:text="Gib deine Matrikelnummer ein"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
