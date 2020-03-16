@@ -33,11 +33,9 @@ public class MainActivity extends AppCompatActivity {
                 textQuersumme = (TextView) findViewById(R.id.textView2);
                 matrikelNrTxt = (EditText) findViewById(R.id.editText);
                 textAntwort = (TextView) findViewById(R.id.textView3);
-
                 textAntwort.setText(workingWithServer());
                 try {
-                    int matrikelNr = Integer.parseInt(matrikelNrTxt.getText().toString());
-                    textQuersumme.setText(calcAlternierendeQuersumme(matrikelNr));
+                    textQuersumme.setText(calcAlternierendeQuersumme(Integer.parseInt(matrikelNrTxt.getText().toString())));
                 }catch (NumberFormatException e ) {
                     Toast.makeText(getApplicationContext(), "Geben Sie Matrikelnummer ein!", Toast.LENGTH_SHORT).show();
                 }
@@ -69,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
         }catch (InterruptedException e){
             e.printStackTrace();
         }
-
         return antwortVomServer;
     }
     public String calcAlternierendeQuersumme(int num) {
@@ -95,7 +92,4 @@ public class MainActivity extends AppCompatActivity {
             return "Ungerade";
         }
     }
-
-
-
 }
